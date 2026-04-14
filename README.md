@@ -32,13 +32,7 @@ o	Modularity
 •	Package-based project structure
 ________________________________________
  Project Structure
-src/
- └── calculator/
-      ├── main/        # Entry point (Main.java)
-      ├── ui/          # GUI components (CalculatorUI.java)
-      ├── core/        # Core logic (StandardCalculator.java)
-      ├── converter/   # Conversion logic (future scalable module)
-      └── utils/       # Utility/helper classes
+src/ └── calculator/ ├── main/ # Entry point (Main.java) ├── ui/ # GUI components (CalculatorUI.java) ├── core/ # Core logic (StandardCalculator.java) ├── converter/ # Conversion logic (future scalable module) └── utils/ # Utility/helper classes
 ________________________________________
  How to Run
 1.	Open terminal in project directory
