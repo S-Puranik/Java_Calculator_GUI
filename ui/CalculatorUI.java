@@ -184,3 +184,162 @@ public class CalculatorUI extends JFrame {
 
         tabbedPane.add("Scientific", sciPanel);
         // end of scientific panel
+        //converter panel:
+        JPanel convPanel = new JPanel();
+        convPanel.setLayout(null);
+
+        // Input field
+        JTextField inputField = new JTextField();
+        inputField.setBounds(20, 20, 150, 30);
+        convPanel.add(inputField);
+
+        // Output field
+        JTextField outputField = new JTextField();
+        outputField.setBounds(200, 20, 150, 30);
+        outputField.setEditable(false);
+        convPanel.add(outputField);
+        inputField.setHorizontalAlignment(JTextField.CENTER);
+        outputField.setHorizontalAlignment(JTextField.CENTER);
+
+        // Category dropdown
+        String[] categories = {"Length", "Weight", "Temperature", "Area", "Volume", "Speed"};
+        JComboBox<String> categoryBox = new JComboBox<>(categories);
+        categoryBox.setBounds(20, 70, 150, 30);
+        convPanel.add(categoryBox);
+
+        // From unit
+        JComboBox<String> fromUnit = new JComboBox<>();
+        fromUnit.setBounds(20, 120, 150, 30);
+        convPanel.add(fromUnit);
+
+        // To unit
+        JComboBox<String> toUnit = new JComboBox<>();
+        toUnit.setBounds(200, 120, 150, 30);
+        convPanel.add(toUnit);
+
+        // Convert button
+        JButton convertBtn = new JButton("Convert");
+        convertBtn.setBounds(120, 180, 120, 40);
+        convPanel.add(convertBtn);
+        convertBtn.addActionListener(e -> {
+        try {
+            double input = Double.parseDouble(inputField.getText());
+            String category = (String) categoryBox.getSelectedItem();
+            String from = (String) fromUnit.getSelectedItem();
+            String to = (String) toUnit.getSelectedItem();
+
+            double result = 0;
+
+            if (category.equals("Length")) {
+                if (from.equals("Meter") && to.equals("Kilometer"))
+                    result = input / 1000;
+                else if (from.equals("Kilometer") && to.equals("Meter"))
+                    result = input * 1000;
+                else if (from.equals("Meter") && to.equals("Centimeter"))
+                    result = input * 100;
+                else if (from.equals("Centimeter") && to.equals("Meter"))
+                    result = input / 100;
+            }
+
+            else if (category.equals("Weight")) {
+                if (from.equals("Gram") && to.equals("Kilogram"))
+                    result = input / 1000;
+                else if (from.equals("Kilogram") && to.equals("Gram"))
+                    result = input * 1000;
+            }
+
+            else if (category.equals("Temperature")) {
+                if (from.equals("Celsius") && to.equals("Fahrenheit"))
+                    result = (input * 9/5) + 32;
+                else if (from.equals("Fahrenheit") && to.equals("Celsius"))
+                    result = (input - 32) * 5/9;
+            }
+            else if (category.equals("Area")) {
+            if (from.equals("Sq Meter") && to.equals("Sq Kilometer"))
+                result = input / 1_000_000;
+            else if (from.equals("Sq Kilometer") && to.equals("Sq Meter"))
+                result = input * 1_000_000;
+            }
+            else if (category.equals("Volume")) {
+                if (from.equals("Liter") && to.equals("Milliliter"))
+                    result = input * 1000;
+                else if (from.equals("Milliliter") && to.equals("Liter"))
+                    result = input / 1000;
+            }        
+            else if (category.equals("Speed")) {
+                if (from.equals("m/s") && to.equals("km/h"))
+                    result = input * 3.6;
+                else if (from.equals("km/h") && to.equals("m/s"))
+                    result = input / 3.6;
+            }
+
+            outputField.setText(String.valueOf(result));
+
+        } catch (Exception ex) {
+            outputField.setText("Error");
+        }
+    });
+
+        // Add panel
+        tabbedPane.add("Converter", convPanel);
+        categoryBox.setSelectedIndex(0);
+        categoryBox.addActionListener(e -> {
+        fromUnit.removeAllItems();
+        toUnit.removeAllItems();
+
+        String selected = (String) categoryBox.getSelectedItem();
+
+        if (selected.equals("Length")) {
+            String[] units = {"Meter", "Kilometer", "Centimeter"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        } else if (selected.equals("Weight")) {
+            String[] units = {"Gram", "Kilogram"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        } else if (selected.equals("Temperature")) {
+            String[] units = {"Celsius", "Fahrenheit"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        }
+        else if (selected.equals("Area")) {
+            String[] units = {"Sq Meter", "Sq Kilometer"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        }
+
+        else if (selected.equals("Volume")) {
+            String[] units = {"Liter", "Milliliter"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        }
+
+        else if (selected.equals("Speed")) {
+            String[] units = {"m/s", "km/h"};
+            for (String u : units) {
+                fromUnit.addItem(u);
+                toUnit.addItem(u);
+            }
+        }
+    });
+    standardPanel.setBackground(new Color(245, 245, 245));
+    sciPanel.setBackground(new Color(245, 245, 245));
+    convPanel.setBackground(new Color(245, 245, 245));                
+
+        add(tabbedPane);
+
+        setVisible(true);
+        setResizable(false);
+    }
+    
+}
