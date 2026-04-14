@@ -1,4 +1,4 @@
-package calculator.core;
+package core;
 
 public class ScientificCalculator {
 
