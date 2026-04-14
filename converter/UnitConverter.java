@@ -1,4 +1,4 @@
-package calculator.converter;
+package converter;
 
 public class UnitConverter {
 
