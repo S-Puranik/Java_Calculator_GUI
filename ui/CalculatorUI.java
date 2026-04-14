@@ -1,7 +1,7 @@
-package calculator.ui;
-import calculator.core.StandardCalculator;
-import calculator.converter.UnitConverter;
-import calculator.core.ScientificCalculator;
+package ui;
+import core.StandardCalculator;
+import converter.UnitConverter;
+import core.ScientificCalculator;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.Font; //for styling
