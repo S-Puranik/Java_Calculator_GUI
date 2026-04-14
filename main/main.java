@@ -1,6 +1,6 @@
-package calculator.main;
+package =main;
 
-import calculator.ui.CalculatorUI;
+import ui.CalculatorUI;
 
 public class Main {
     public static void main(String[] args) {
