@@ -1,5 +1,6 @@
 package calculator.ui;
 import calculator.core.StandardCalculator;
+import calculator.core.ScientificCalculator;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.Font; //for styling
@@ -118,6 +119,7 @@ public class CalculatorUI extends JFrame {
         //scientific panel:
         JPanel sciPanel = new JPanel();
         sciPanel.setLayout(null);
+        ScientificCalculator sciCalc = new ScientificCalculator();
 
         // Display
         JTextField sciDisplay = new JTextField();
@@ -142,27 +144,27 @@ public class CalculatorUI extends JFrame {
                 try {
                     double val = Double.parseDouble(sciDisplay.getText());
 
-                    switch (text) {
+                   switch (text) {
                         case "sin":
-                            sciDisplay.setText(String.valueOf(Math.sin(Math.toRadians(val))));
+                            sciDisplay.setText(String.valueOf(sciCalc.sin(val)));
                             break;
                         case "cos":
-                            sciDisplay.setText(String.valueOf(Math.cos(Math.toRadians(val))));
+                            sciDisplay.setText(String.valueOf(sciCalc.cos(val)));
                             break;
                         case "tan":
-                            sciDisplay.setText(String.valueOf(Math.tan(Math.toRadians(val))));
+                            sciDisplay.setText(String.valueOf(sciCalc.tan(val)));
                             break;
                         case "log":
-                            sciDisplay.setText(String.valueOf(Math.log10(val)));
+                            sciDisplay.setText(String.valueOf(sciCalc.log(val)));
                             break;
                         case "sqrt":
-                            sciDisplay.setText(String.valueOf(Math.sqrt(val)));
+                            sciDisplay.setText(String.valueOf(sciCalc.sqrt(val)));
                             break;
                         case "x^2":
-                            sciDisplay.setText(String.valueOf(val * val));
+                            sciDisplay.setText(String.valueOf(sciCalc.square(val)));
                             break;
                         case "1/x":
-                            sciDisplay.setText(String.valueOf(1 / val));
+                            sciDisplay.setText(String.valueOf(sciCalc.reciprocal(val)));
                             break;
                         case "C":
                             sciDisplay.setText("");
