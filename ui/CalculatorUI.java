@@ -1,5 +1,6 @@
 package calculator.ui;
 import calculator.core.StandardCalculator;
+import calculator.converter.UnitConverter;
 import calculator.core.ScientificCalculator;
 import java.awt.Color;
 import javax.swing.*;
@@ -187,6 +188,7 @@ public class CalculatorUI extends JFrame {
         tabbedPane.add("Scientific", sciPanel);
         // end of scientific panel
         //converter panel:
+        UnitConverter converter = new UnitConverter();
         JPanel convPanel = new JPanel();
         convPanel.setLayout(null);
 
@@ -230,53 +232,8 @@ public class CalculatorUI extends JFrame {
             String from = (String) fromUnit.getSelectedItem();
             String to = (String) toUnit.getSelectedItem();
 
-            double result = 0;
-
-            if (category.equals("Length")) {
-                if (from.equals("Meter") && to.equals("Kilometer"))
-                    result = input / 1000;
-                else if (from.equals("Kilometer") && to.equals("Meter"))
-                    result = input * 1000;
-                else if (from.equals("Meter") && to.equals("Centimeter"))
-                    result = input * 100;
-                else if (from.equals("Centimeter") && to.equals("Meter"))
-                    result = input / 100;
-            }
-
-            else if (category.equals("Weight")) {
-                if (from.equals("Gram") && to.equals("Kilogram"))
-                    result = input / 1000;
-                else if (from.equals("Kilogram") && to.equals("Gram"))
-                    result = input * 1000;
-            }
-
-            else if (category.equals("Temperature")) {
-                if (from.equals("Celsius") && to.equals("Fahrenheit"))
-                    result = (input * 9/5) + 32;
-                else if (from.equals("Fahrenheit") && to.equals("Celsius"))
-                    result = (input - 32) * 5/9;
-            }
-            else if (category.equals("Area")) {
-            if (from.equals("Sq Meter") && to.equals("Sq Kilometer"))
-                result = input / 1_000_000;
-            else if (from.equals("Sq Kilometer") && to.equals("Sq Meter"))
-                result = input * 1_000_000;
-            }
-            else if (category.equals("Volume")) {
-                if (from.equals("Liter") && to.equals("Milliliter"))
-                    result = input * 1000;
-                else if (from.equals("Milliliter") && to.equals("Liter"))
-                    result = input / 1000;
-            }        
-            else if (category.equals("Speed")) {
-                if (from.equals("m/s") && to.equals("km/h"))
-                    result = input * 3.6;
-                else if (from.equals("km/h") && to.equals("m/s"))
-                    result = input / 3.6;
-            }
-
+            double result = converter.convert(category, from, to, input);
             outputField.setText(String.valueOf(result));
-
         } catch (Exception ex) {
             outputField.setText("Error");
         }
