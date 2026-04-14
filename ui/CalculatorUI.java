@@ -115,3 +115,72 @@ public class CalculatorUI extends JFrame {
         tabbedPane.add("Standard", standardPanel);
 
         // end of standart panel
+        //scientific panel:
+        JPanel sciPanel = new JPanel();
+        sciPanel.setLayout(null);
+
+        // Display
+        JTextField sciDisplay = new JTextField();
+        sciDisplay.setBounds(20, 20, 340, 40);
+        sciDisplay.setFont(new Font("Arial", Font.BOLD, 20));
+        sciPanel.add(sciDisplay);
+
+        // Buttons
+        String[] sciButtons = {
+            "sin", "cos", "tan", "log",
+            "sqrt", "x^2", "1/x", "C"
+        };
+
+        int x1 = 20, y1 = 80;
+
+        for (String text : sciButtons) {
+            JButton btn = new JButton(text);
+            btn.setBounds(x1, y1, 80, 50);
+            btn.setFont(new Font("Arial", Font.BOLD, 12));
+
+            btn.addActionListener(e -> {
+                try {
+                    double val = Double.parseDouble(sciDisplay.getText());
+
+                    switch (text) {
+                        case "sin":
+                            sciDisplay.setText(String.valueOf(Math.sin(Math.toRadians(val))));
+                            break;
+                        case "cos":
+                            sciDisplay.setText(String.valueOf(Math.cos(Math.toRadians(val))));
+                            break;
+                        case "tan":
+                            sciDisplay.setText(String.valueOf(Math.tan(Math.toRadians(val))));
+                            break;
+                        case "log":
+                            sciDisplay.setText(String.valueOf(Math.log10(val)));
+                            break;
+                        case "sqrt":
+                            sciDisplay.setText(String.valueOf(Math.sqrt(val)));
+                            break;
+                        case "x^2":
+                            sciDisplay.setText(String.valueOf(val * val));
+                            break;
+                        case "1/x":
+                            sciDisplay.setText(String.valueOf(1 / val));
+                            break;
+                        case "C":
+                            sciDisplay.setText("");
+                            break;
+                    }
+                } catch (Exception ex) {
+                    sciDisplay.setText("Error");
+                }
+            });
+
+            sciPanel.add(btn);
+
+            x1 += 90;
+            if (x1 > 300) {
+                x1 = 20;
+                y1 += 60;
+            }
+        }
+
+        tabbedPane.add("Scientific", sciPanel);
+        // end of scientific panel
