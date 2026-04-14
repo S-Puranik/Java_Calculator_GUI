@@ -46,7 +46,7 @@ utils/       Helper classes
 How to Run
 
 1. Clone the repository
-   git clone https://github.com/<your-username>/Java_Calculator_GUI.git
+   git clone https://github.com/S-Puranik/Java_Calculator_GUI.git
 
 2. Navigate to project folder
    cd Java_Calculator_GUI
